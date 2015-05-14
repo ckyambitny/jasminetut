@@ -1,4 +1,3 @@
 require([
-	'numbers'
-	
-	]);				
+    'numbers'
+]);

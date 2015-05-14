@@ -8,6 +8,9 @@ define( function () {
 			total = 0;
 
 		inputs.forEach(function (value) {
+			if ( typeof value === 'string') {
+				value = parseInt(value, 10) || 0;
+			};
 			total += value;
 		});
 		

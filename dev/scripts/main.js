@@ -1,4 +1,1 @@
-require([
-	'numbers'
-	
-	]);				
+require(['numbers']);				

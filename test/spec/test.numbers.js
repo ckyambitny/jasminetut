@@ -33,6 +33,21 @@ define([
                 expect(numbers.add(0, 0, 0, 0, 0, 0, 0, 0, 0)).toEqual(0);
                 expect(numbers.add(0, 0, 0, 0, 0, 10, 0, 0, 0)).toEqual(10);
             });
+            it('should try to parse string argument to float, otherwise assume value of 0', function () {
+                expect(numbers.add('2.4', 0,0,'1.1')).toEqual(3.5);
+                expect(numbers.add('yolo', 0,0,'0.00003', 'napewnoniefloat',7,'0')).toEqual(7.00003);
+                expect(numbers.add('2.4i string', 0,0)).toEqual(2.4);
+                expect(numbers.add(0.11, 0.2)).toEqual(0.31);
+            });
+        });
+        describe('The getPrecision method', function () {
+            it('should get the float precision from argument', function () {
+                expect(numbers.getPrecision(0.00004)).toEqual(5);
+                expect(numbers.getPrecision(1.5555556)).toEqual(7);  
+            });
+            it('should throw an error if argument is not a number type', function () {
+                expect( function () { numbers.getPrecision('baba'); } ).toThrow( new Error('Not a number argument') );
+            });
         });
     });
 });

@@ -54,6 +54,7 @@ define(function () {
     // Public API
     return {
         add: add,
-        getPrecision : getPrecision
+        getPrecision : getPrecision,
+        parseInput : parseInput
     }
 });

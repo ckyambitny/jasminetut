@@ -83,6 +83,17 @@ define([
                 numbers.add(0, 1);
                 expect(numbers.parseInput).toHaveBeenCalled();
             });
+            it('tracks how many times `parseInput` have been called when run `add`', function () {
+                spyOn(numbers, 'parseInput');
+                numbers.add(0, 1, 3);
+                expect(numbers.parseInput).toHaveBeenCalled();
+                expect(numbers.parseInput.calls.count()).toEqual(3);
+            });
+            it("tracks the arguments of all calls", function() {
+                spyOn(numbers, 'parseInput');
+                numbers.add(0, 1, 'janko');
+                expect(numbers.parseInput.calls.allArgs()).toEqual([[0],[1],['janko']]);
+            });
         });
     });
 });

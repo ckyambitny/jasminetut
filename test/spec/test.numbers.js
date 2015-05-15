@@ -58,24 +58,30 @@ define([
                 expect( function() { numbers.getPrecision( [7,3] ); } ).toThrow( new Error('Not a number argument') );
             });
         });
+
         describe('A spy', function () {
             it('should invoke add method ', function () {
                 spyOn(numbers, 'add');
                 numbers.add('2.4i string', 0, 0);
                 expect(numbers.add).toHaveBeenCalled();
-
             });
+
             it('should invoke parseInput method', function () {
                 spyOn(numbers, 'parseInput');
                 numbers.parseInput('2.4i string');
                 expect(numbers.parseInput).toHaveBeenCalled();
-
             });
+
             it('should invoke getPrecision method ', function () {
                 spyOn(numbers, 'getPrecision');
                 numbers.getPrecision(0.55563);
                 expect(numbers.getPrecision).toHaveBeenCalled();
+            });
 
+            it('should invoke `parseInput` method when run `add`', function () {
+                spyOn(numbers, 'parseInput');
+                numbers.add(0, 1);
+                expect(numbers.parseInput).toHaveBeenCalled();
             });
         });
     });

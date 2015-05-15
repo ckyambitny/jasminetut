@@ -12,49 +12,55 @@ define(function () {
      */
     function add() {
         var inputs = Array.prototype.slice.call(arguments);
-        return inputs.reduce(function (mem, i) {           
-            i = parseInput(i);
-           
+        return inputs.reduce(function (mem, i) {
+            i = API.parseInput(i);
+
             return mem + i;
         }, 0);
-    };
-     /**
+    }
+
+    /**
      * ### parseInput
      *
      * Passed argument to function
      * then it will be returns parsed input.
      *
-     * @param {a}
+     * @param {string} a
      * @returns {number}
      */
     function parseInput(a) {
-        if ( typeof a === 'string' ) {
-                a = parseFloat(a, 10) || 0;   
-            }
-            if ( typeof a !== 'number') {
-                throw new Error ('Not a number');
-            };
+        if (typeof a === 'string') {
+            a = parseFloat(a) || 0;
+        }
+
+        if (typeof a !== 'number') {
+            throw new Error('Not a number');
+        }
+
         return a;
-    };
+    }
     /**
      * ### getPrecision
      *
      * Passed float argument to this function
-     * them it will be returns decimal point precisin of it.
+     * them it will be returns decimal point precision of it.
      *
-     * @param {number}
+     * @param {number} a
      * @returns {number}
      */
     function getPrecision(a) {
-        if ( typeof a !== 'number' ) throw new Error ('Not a number argument');
+        if (typeof a !== 'number') throw new Error('Not a number argument');
         var e = 1;
         while (Math.round(a * e) / e !== a) e *= 10;
         return Math.log(e) / Math.LN10;
     }
+
     // Public API
-    return {
+    var API = {
         add: add,
-        getPrecision : getPrecision,
-        parseInput : parseInput
-    }
+        getPrecision: getPrecision,
+        parseInput: parseInput
+    };
+
+    return API;
 });

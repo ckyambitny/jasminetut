@@ -44,6 +44,7 @@ define([
                 expect( function() { numbers.add( new Date(), 'bolek' ); } ).toThrow( new Error('Not a number') );
                 expect( function() { numbers.add( { jan:'jan', wiek: 67} ); } ).toThrow( new Error('Not a number') );
             });
+            
         });
         describe('The getPrecision method', function () {
             it('should get the float precision from argument', function () {
@@ -55,6 +56,15 @@ define([
                 expect( function() { numbers.getPrecision( new Date() ); } ).toThrow( new Error('Not a number argument') );
                 expect( function() { numbers.getPrecision( { name :'jan', age : 55  }); } ).toThrow( new Error('Not a number argument') );
                 expect( function() { numbers.getPrecision( [7,3] ); } ).toThrow( new Error('Not a number argument') );
+            });
+        });
+        describe('A spy', function () {
+            // how to write a test that spys  parseInput method?
+            it('should invoke parseInput method and parse the input', function () {
+                spyOn(numbers, 'parseInput');
+                numbers.add('2.4i string', 0, 0);
+                expect(numbers.parseInput).toHaveBeenCalled();
+
             });
         });
     });

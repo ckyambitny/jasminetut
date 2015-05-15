@@ -12,15 +12,19 @@ define(function () {
      */
     function add() {
         var inputs = Array.prototype.slice.call(arguments);
+        var precision = 1;
         
-       
         return inputs.reduce(function (mem, i) {           
             if ( typeof i === 'string' ) {
                 i = parseFloat(i, 10) || 0;   
             }
-            return mem + i;
+            if ( typeof i !== 'number') {
+                throw new Error ('Not a number');
+            };
+           
+            return mem+ i;
         }, 0);
-    }
+    };
      /**
      * ### getPrecision
      *

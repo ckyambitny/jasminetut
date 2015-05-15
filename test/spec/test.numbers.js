@@ -39,6 +39,11 @@ define([
                 expect(numbers.add('2.4i string', 0,0)).toEqual(2.4);
                 expect(numbers.add(0.11, 0.2)).toEqual(0.31);
             });
+            it('should throw an error if arguments are not a number type', function () {
+                expect( function() { numbers.add([6,7]); } ).toThrow( new Error('Not a number') );
+                expect( function() { numbers.add( new Date(), 'bolek' ); } ).toThrow( new Error('Not a number') );
+                expect( function() { numbers.add( { jan:'jan', wiek: 67} ); } ).toThrow( new Error('Not a number') );
+            });
         });
         describe('The getPrecision method', function () {
             it('should get the float precision from argument', function () {
@@ -46,7 +51,10 @@ define([
                 expect(numbers.getPrecision(1.5555556)).toEqual(7);  
             });
             it('should throw an error if argument is not a number type', function () {
-                expect( function () { numbers.getPrecision('baba'); } ).toThrow( new Error('Not a number argument') );
+                expect( function() { numbers.getPrecision('baba'); } ).toThrow( new Error('Not a number argument') );
+                expect( function() { numbers.getPrecision( new Date() ); } ).toThrow( new Error('Not a number argument') );
+                expect( function() { numbers.getPrecision( { name :'jan', age : 55  }); } ).toThrow( new Error('Not a number argument') );
+                expect( function() { numbers.getPrecision( [7,3] ); } ).toThrow( new Error('Not a number argument') );
             });
         });
     });
